@@ -19,3 +19,21 @@ for foldername in os.listdir('.'):
 message += "</html>"
 f.write(message)
 f.close()
+
+#add link to index in all files
+
+def add_link(filename):
+	f = open(filename, 'a')
+	if not "list.html" in open(filename).read():
+		f.write("<a href=\"\list.html\">Index of links</a>")
+	f.close()
+
+for filename in os.listdir('.'):
+	if os.path.isfile(filename) and filename.endswith(".html"):
+		add_link(filename)
+
+for foldername in os.listdir('.'):
+	if os.path.isdir(foldername) and not foldername.endswith(".git"):
+		for filename in os.listdir("./" + foldername):
+			add_link("./" + foldername + "/" + filename)
+
